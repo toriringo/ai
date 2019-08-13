@@ -38,7 +38,7 @@ int main()
 
 	/* 乱数の初期化 */
 	srand(SEED);
-	
+
 	/* 最適化の本体 */
 	for(i = 0; i < ILIMIT; ++i){
 		/* フェロモンの状態を表示 */
@@ -52,7 +52,7 @@ int main()
 	/* フェロモンの状態を表示 */
 	printf("%d:\n", i);
 	printp(pheromone);
-	
+
 	return 0;
 }
 
@@ -65,7 +65,7 @@ void update(int cost[2][STEP], double pheromone[2][STEP], int mstep[NO_A][STEP] 
 	int lm;             /* 蟻の歩いた距離 */
 	double sum_lm = 0;  /* 蟻の歩いた合計距離 */
 	int i, j;
- 
+
 	/* フェロモンの蒸発 */
 	for(i = 0; i < 2; ++i){
 		for(j = 0; j < STEP; ++j){
@@ -80,7 +80,7 @@ void update(int cost[2][STEP], double pheromone[2][STEP], int mstep[NO_A][STEP] 
 		for(i = 0; i < STEP; ++i){
 			lm += cost[mstep[m][i]][i];
 		}
-		
+
 		/* フェロモンの上塗り */
 		for(i = 0; i < STEP; ++i){
 			pheromone[mstep[m][i]][i] += Q * (1.0 / lm);
@@ -98,12 +98,12 @@ void walk(int cost[2][STEP], double pheromone[2][STEP], int mstep[NO_A][STEP])
 {
 	int m;  /* 蟻の個体番号 */
 	int s;  /* 蟻の現在ステップ位置 */
-	
+
 	for(m = 0; m < NO_A; ++m){
 		for(s = 0; s < STEP; ++s){
 			/* ε-greedy法による行動選択 */
 			if((rand1() < EPSILON)
-				|| (abs(pheromone[0][s] - pheromone[1][s]) < 1e-9))
+				|| (abs(int)(pheromone[0][s] - pheromone[1][s]) < 1e-9))
 			{  /* ランダムに行動  */
 				mstep[m][s] = rand01();
 			}
@@ -142,10 +142,10 @@ void printmstep(int mstep[NO_A][STEP])
 /**********************/
 /*  フェロモンの表示  */
 /**********************/
-void printp(double pheromone[2][STEP]) 
+void printp(double pheromone[2][STEP])
 {
 	int i, j;
-	
+
 	for(i = 0; i < 2; ++i){
 		for(j = 0; j < STEP; ++j){
 			printf("%4.2lf ", pheromone[i][j]);
@@ -170,10 +170,10 @@ double rand1()
 int rand01()
 {
 	int rnd;
-	
+
 	/* 乱数の最大値を除く */
 	while((rnd = rand()) == RAND_MAX);
-	/* 乱数の計算 */ 
+	/* 乱数の計算 */
 	return (int)((double)rnd / RAND_MAX * 2);
 }
 
