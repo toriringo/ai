@@ -1,6 +1,6 @@
-// 単純な帰納的学習プログラム
-// 学習データと教師データを読み込んで、教師データが1になる、最適な学習データのパターンを出力します
-// learnstock < ldata.txt
+// 帰納的学習プログラム
+// 学習データと教師データを読み込んで、教師データが1になる、最適な学習データのパターンを出力する
+// learn_jobchange < ldata.txt
 
 // Visual Studioとの互換性確保
 #define _CRT_SECURE_NO_WARNINGS
